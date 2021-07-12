@@ -1,3 +1,4 @@
+import { CourseService } from './course.service';
 import { Component, OnInit } from '@angular/core';
 import { Course } from './course';/* classe curso importada */
 
@@ -7,32 +8,28 @@ import { Course } from './course';/* classe curso importada */
 })
 
 export class CourseListComponent implements OnInit {
-  courses: Course[] = []; //aqui eu declarei um array de cursos que ainda está vazio
+
+  filteredCourses: Course[] = [];
+
+  _courses: Course[] = []; //aqui eu declarei um array de cursos que ainda está vazio
+
+  _filterBy: string;
+
+  constructor(private courseService: CourseService){}
 
   ngOnInit(): void {
-    //método que será invocado assim que o componente for criado
-    this.courses = [//atribui dois elementos ao array do atributo "courses: Course[] = [];"
-      {
-        id: 1,
-        name: 'Angular: Forms',
-        imageUrl: '/assets/images/forms.png',
-        price: 99.99,
-        code: 'XPS-8796',
-        duration: 120,
-        rating: 4.5,
-        releaseDate:"November, 2 , 2019"
-      },
-      {
-        id: 2,
-        name: 'Angular: HTTP',
-        imageUrl: '/assets/images/http.png',
-        price: 45.99,
-        code: 'LKL-1094',
-        duration: 80,
-        rating: 4,
-        releaseDate:"November, 4 , 2019"
-      }
-    ];
+    this._courses = this.courseService.retriveAll();//aqui eu faço o array courses receber o retorno da chamada do método retriveAll que retorna um array de cursos
+    this.filteredCourses = this._courses;
+  }
+
+  set filter(value: string){
+    this._filterBy = value;
+
+    this.filteredCourses = this._courses.filter((course: Course) => course.name.toLocaleLowerCase().indexOf(this._filterBy.toLocaleLowerCase()) > -1);
+  }
+
+  get filter(){
+    return this._filterBy;
   }
 
 }

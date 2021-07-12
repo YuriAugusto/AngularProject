@@ -7,4 +7,5 @@ export class Course {//classe que define a estrutura dos dados
   duration: number;
   rating: number;
   releaseDate: string;
+  description: string;
 }

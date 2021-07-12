@@ -10,6 +10,7 @@ import { StarComponent } from './star/star.component';
 import { ReplacePipe } from './pipe/replace.pipe';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { Error404Component } from './error-404/error-404.component';
+import { CourseInfoComponent } from './courses/course-info.component';
 
 @NgModule({
   declarations: [
@@ -18,17 +19,21 @@ import { Error404Component } from './error-404/error-404.component';
     StarComponent,
     ReplacePipe,
     NavBarComponent,
-    Error404Component
+    Error404Component,
+    CourseInfoComponent
   ],
   imports: [BrowserModule,
     FormsModule,
     RouterModule.forRoot([/* aqui definimos as rotas de navegação da aplicação */
 
-      {//rota padrão quando estamos na raiz da aplicação
-        path:'', redirectTo: 'courses', pathMatch: 'full'
-      },
       {
         path:'courses', component: CourseListComponent
+      },
+      {
+        path:'courses/info/:id', component: CourseInfoComponent
+      },
+      {//rota padrão quando estamos na raiz da aplicação
+        path:'', redirectTo: 'courses', pathMatch: 'full'
       },
       {//quando não encontrar a rota, haverá um redirecionamento para esse caminho
         path:'**', component: Error404Component

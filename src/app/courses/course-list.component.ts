@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { Course } from './course';/* classe curso importada */
 
 @Component({
-  selector: 'app-course-list',/* tag */
   templateUrl: './course-list.component.html',/* arquivo html */
 })
 

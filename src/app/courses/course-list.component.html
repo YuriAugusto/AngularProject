@@ -24,8 +24,8 @@
       <td><img [src]="course.imageUrl" width="40" height="40"></td> <!-- aqui utilizamos o conceito de template, parecido com template sting -->
       <td>{{course.name}}</td>
       <td>{{course.price}}</td>
-      <td>{{course.code}}</td>
-      <td>{{course.releaseDate}}</td>
+      <td>{{course.code | lowercase | sobrescrever: '-': ' '}}</td>
+      <td>{{course.releaseDate | date: "dd/MM/yyyy"}}</td><!-- pipes servem para alterar a maneira como informações serão exibidas em tela, siso é um pipe: | date: "dd/MM/yyyy"-->
       <td>
         <app-star [rating]="course.rating"></app-star>
       </td>
